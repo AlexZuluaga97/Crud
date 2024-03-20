@@ -33,6 +33,7 @@
                         <th scope="col">Primer Nombre</th>
                         <th scope="col">Apellidos</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -42,12 +43,8 @@
                         <td th:text="${student.lastName}">apellido</td>
                         <td th:text="${student.email}">email</td>
                         <td>
-                            <!--<a th:href="@{/students}"-->
-
-                            <a th:href="@{/{studentId}(studentId=$(student.studentId))}"
+                            <a th:href="@{/delete/{studentId}(studentId=${student.studentId})}"
                                 class="btn btn-sm btn-danger">Eliminar</a>
-
-
                         </td>
                     </tr>
                 </tbody>

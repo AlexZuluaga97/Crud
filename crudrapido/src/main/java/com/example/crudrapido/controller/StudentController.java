@@ -29,16 +29,26 @@ public class StudentController {
     // agregar estudiante
     @GetMapping("/students/nuevo")
     public String crearStudentForm(Model model) {
-        Student student = new Student();
-        model.addAttribute("student", student);
-        return "crear_student";
+        try { Student student = new Student();
+            model.addAttribute("student", student);
+            return "crear_student";
+            
+        } catch (Exception e) {
+            return("error: " + e);
+        }
+       
     }
 
     // Registrar
     @PostMapping("/students")
     public String guardarStudent(@ModelAttribute("student") Student student) {
-        studentService.saveOrUpdate(student);
-        return "redirect:/students";
+        try {studentService.saveOrUpdate(student);
+            return "redirect:/students";
+            
+        } catch (Exception e) {
+            return("error: " + e);
+        }
+        
     }
 
     // consultar estudiante por id
@@ -54,7 +64,7 @@ public class StudentController {
     }
 
     // eliminar estudiante
-    @GetMapping("/{studentId}")
+    @GetMapping("/delete/{studentId}")
     public String delete(@PathVariable("studentId") Long studentId) {
         studentService.delete(studentId);
         return "redirect:/students";
